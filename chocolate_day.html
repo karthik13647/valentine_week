@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Chocolate Day for You 🍫</title>
+    <!-- SETUP: 1) Replace "Sweetheart" with her name (lines 290, 380, 620) -->
+    <!-- SETUP: 2) Customize chocolate messages in lines 390-450, colors in CSS variables (line 25-35) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* CUSTOMIZE COLORS HERE */
+            --dark-chocolate: #3e2723;
+            --milk-chocolate: #6d4c41;
+            --white-chocolate: #f5e6d3;
+            --caramel: #d4a574;
+            --gold-wrapper: #c9a55a;
+            --strawberry: #ff4757;
+            --mint: #26de81;
+            --cream: #fff8e7;
+            --neon-brown: #8b4513;
+        }
+
+        body {
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #3e2723 0%, #6d4c41 50%, #8d6e63 100%);
+            background-attachment: fixed;
+            color: var(--cream);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* CHOCOLATE DRIP EFFECT */
+        .drip-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .chocolate-drip {
+            position: absolute;
+            width: 60px;
+            background: linear-gradient(180deg, var(--milk-chocolate), var(--dark-chocolate));
+            border-radius: 0 0 50% 50%;
+            animation: drip 8s ease-in-out infinite;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes drip {
+            0%, 100% { height: 50px; }
+            50% { height: 150px; }
+        }
+
+        /* FLOATING CANDIES */
+        .candy-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .floating-candy {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: float-candy 15s linear infinite;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes float-candy {
+            0% {
+                transform: translateY(100vh) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-20vh) rotate(720deg) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* ANIMATED CHOCOLATE BOX */
+        .chocolate-box {
+            width: 350px;
+            height: 350px;
+            position: relative;
+            margin-bottom: 60px;
+            animation: box-bounce 3s ease-in-out infinite;
+            filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
+        }
+
+        @keyframes box-bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .box-lid {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(135deg, var(--strawberry), #e84118);
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            animation: lid-open 4s ease-in-out infinite;
+            transform-origin: top;
+            box-shadow: 0 10px 30px rgba(232, 65, 24, 0.5);
+        }
+
+        @keyframes lid-open {
+            0%, 70%, 100% { transform: rotateX(0deg); }
+            85% { transform: rotateX(-45deg); }
+        }
+
+        .box-ribbon {
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            background: var(--gold-wrapper);
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .box-ribbon::before {
+            content: '🎀';
+            position: absolute;
+            font-size: 4rem;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: ribbon-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes ribbon-glow {
+            0%, 100% { filter: drop-shadow(0 0 10px var(--gold-wrapper)); }
+            50% { filter: drop-shadow(0 0 30px var(--gold-wrapper)); }
+        }
+
+        .box-body {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #8b4513, #654321);
+            border-radius: 0 0 15px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .chocolate-piece {
+            font-size: 2.5rem;
+            animation: piece-pop 1.5s ease-in-out infinite;
+        }
+
+        .chocolate-piece:nth-child(1) { animation-delay: 0s; }
+        .chocolate-piece:nth-child(2) { animation-delay: 0.2s; }
+        .chocolate-piece:nth-child(3) { animation-delay: 0.4s; }
+        .chocolate-piece:nth-child(4) { animation-delay: 0.6s; }
+        .chocolate-piece:nth-child(5) { animation-delay: 0.8s; }
+        .chocolate-piece:nth-child(6) { animation-delay: 1s; }
+
+        @keyframes piece-pop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2) rotate(10deg); }
+        }
+
+        /* MAIN TITLE */
+        .hero-title {
+            font-size: clamp(2.5rem, 10vw, 6rem);
+            text-align: center;
+            background: linear-gradient(45deg, var(--caramel), var(--gold-wrapper), var(--white-chocolate), var(--caramel));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: chocolate-shine 4s ease infinite;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        @keyframes chocolate-shine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .tagline {
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            color: var(--white-chocolate);
+            text-align: center;
+            margin-bottom: 20px;
+            animation: text-melt 3s ease-in-out infinite;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        @keyframes text-melt {
+            0%, 100% { letter-spacing: 2px; }
+            50% { letter-spacing: 5px; }
+        }
+
+        /* CHOCOLATE CARDS SECTION */
+        .chocolate-cards {
+            padding: 100px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .candy-card {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.3), rgba(141, 110, 99, 0.3));
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--caramel);
+            border-radius: 30px;
+            padding: 50px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.275);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .candy-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: card-shimmer 3s linear infinite;
+        }
+
+        @keyframes card-shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .candy-card:hover {
+            transform: translateY(-20px) scale(1.05) rotate(-2deg);
+            box-shadow: 0 30px 70px rgba(255, 71, 87, 0.5), 0 0 50px rgba(201, 165, 90, 0.4);
+            border-color: var(--gold-wrapper);
+        }
+
+        .candy-icon {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            display: inline-block;
+            animation: candy-wiggle 2s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes candy-wiggle {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            75% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        .candy-title {
+            font-size: 2.2rem;
+            color: var(--gold-wrapper);
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .candy-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--white-chocolate);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* SWEETNESS METER */
+        .sweetness-section {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(62, 39, 35, 0.5), transparent);
+        }
+
+        .sweetness-title {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            color: var(--caramel);
+            margin-bottom: 50px;
+            text-shadow: 0 0 30px rgba(201, 165, 90, 0.5);
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        .meter-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--caramel);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .sweetness-bar {
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(90deg, var(--dark-chocolate), var(--milk-chocolate));
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .sweetness-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--strawberry), var(--caramel), var(--gold-wrapper));
+            background-size: 200% 100%;
+            width: 0;
+            animation: fill-sweetness 4s ease-out forwards, shimmer-bar 3s linear infinite;
+            position: relative;
+            box-shadow: 0 0 30px var(--strawberry);
+        }
+
+        @keyframes fill-sweetness {
+            to { width: 100%; }
+        }
+
+        @keyframes shimmer-bar {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .sweetness-fill::after {
+            content: '100% Sweet! 🍫';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+            color: white;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* CHOCOLATE WRAPPER ANIMATION */
+        .wrapper-section {
+            padding: 100px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .wrapper-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--gold-wrapper);
+            margin-bottom: 60px;
+            text-align: center;
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        .wrapper-box {
+            width: 400px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--gold-wrapper), var(--caramel));
+            border-radius: 20px;
+            position: relative;
+            animation: wrapper-rotate 5s linear infinite;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes wrapper-rotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .wrapper-shine {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%);
+            animation: shine-move 2s linear infinite;
+        }
+
+        @keyframes shine-move {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* FINAL MESSAGE */
+        .final-section {
+            padding: 150px 20px;
+            text-align: center;
+            background: radial-gradient(circle, rgba(139, 69, 19, 0.3), transparent);
+        }
+
+        .final-message {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            background: linear-gradient(45deg, var(--white-chocolate), var(--caramel), var(--gold-wrapper), var(--white-chocolate));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: final-glow 5s ease infinite;
+            font-weight: bold;
+            line-height: 1.3;
+            font-family: 'Brush Script MT', cursive;
+            margin-bottom: 40px;
+        }
+
+        @keyframes final-glow {
+            0%, 100% { background-position: 0% 50%; filter: drop-shadow(0 0 20px rgba(201, 165, 90, 0.5)); }
+            50% { background-position: 100% 50%; filter: drop-shadow(0 0 50px rgba(201, 165, 90, 0.8)); }
+        }
+
+        .chocolate-stack {
+            font-size: 7rem;
+            animation: stack-melt 4s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes stack-melt {
+            0%, 100% { transform: scaleY(1) translateY(0); }
+            50% { transform: scaleY(1.2) translateY(-10px); }
+        }
+
+        /* SOUND TOGGLE */
+        .sound-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--caramel), var(--gold-wrapper));
+            border: 3px solid var(--white-chocolate);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 40px var(--caramel);
+            animation: sound-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes sound-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .sound-toggle:hover {
+            transform: scale(1.2) rotate(20deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 60px var(--gold-wrapper);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .chocolate-box { width: 280px; height: 280px; }
+            .box-body { height: 200px; padding: 15px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .wrapper-box { width: 300px; height: 200px; font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- CHOCOLATE DRIPS -->
+    <div class="drip-container" id="dripContainer"></div>
+
+    <!-- FLOATING CANDIES -->
+    <div class="candy-wrapper" id="candyWrapper"></div>
+
+    <div class="content-wrapper">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="chocolate-box">
+                <div class="box-lid">
+                    <div class="box-ribbon"></div>
+                </div>
+                <div class="box-body">
+                    <div class="chocolate-piece">🍫</div>
+                    <div class="chocolate-piece">🍬</div>
+                    <div class="chocolate-piece">🍫</div>
+                    <div class="chocolate-piece">🍬</div>
+                    <div class="chocolate-piece">🍫</div>
+                    <div class="chocolate-piece">🍬</div>
+                </div>
+            </div>
+
+            <h1 class="hero-title">Happy Chocolate Day!</h1>
+            <p class="tagline">Sweetheart, You're Sweeter Than Any Chocolate 🍫💕</p>
+        </section>
+
+        <!-- CHOCOLATE MESSAGE CARDS -->
+        <section class="chocolate-cards">
+            <div class="cards-grid">
+                <div class="candy-card">
+                    <div class="candy-icon">🍫</div>
+                    <h3 class="candy-title">Dark & Deep</h3>
+                    <p class="candy-description">Like dark chocolate, my love for you is rich, intense, and pure. Every moment with you is a treasure I savor forever.</p>
+                </div>
+
+                <div class="candy-card">
+                    <div class="candy-icon">🍬</div>
+                    <h3 class="candy-title">Sweet Surprise</h3>
+                    <p class="candy-description">You're my favorite surprise, sweeter than any candy. Your smile melts my heart like chocolate on a warm day.</p>
+                </div>
+
+                <div class="candy-card">
+                    <div class="candy-icon">🍩</div>
+                    <h3 class="candy-title">Perfectly Paired</h3>
+                    <p class="candy-description">Just like chocolate and caramel, we're the perfect combination. Together, we create something magical and unforgettable.</p>
+                </div>
+
+                <div class="candy-card">
+                    <div class="candy-icon">🧁</div>
+                    <h3 class="candy-title">Sweetness Overload</h3>
+                    <p class="candy-description">No chocolate in the world can match your sweetness. You bring joy to my life in ways I never imagined possible.</p>
+                </div>
+
+                <div class="candy-card">
+                    <div class="candy-icon">🍰</div>
+                    <h3 class="candy-title">Layers of Love</h3>
+                    <p class="candy-description">Like a layered chocolate cake, our love has depth, richness, and beauty. Each layer reveals something more wonderful.</p>
+                </div>
+
+                <div class="candy-card">
+                    <div class="candy-icon">🍪</div>
+                    <h3 class="candy-title">Baked with Love</h3>
+                    <p class="candy-description">My love for you is homemade with care, warmth, and endless affection. You're the chocolate chip in my cookie of life!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SWEETNESS METER -->
+        <section class="sweetness-section">
+            <h2 class="sweetness-title">Your Sweetness Level 💖</h2>
+            <div class="meter-container">
+                <div class="sweetness-bar">
+                    <div class="sweetness-fill"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROTATING WRAPPER -->
+        <section class="wrapper-section">
+            <h2 class="wrapper-title">Unwrap My Love for You 🎁</h2>
+            <div class="wrapper-box">
+                <div class="wrapper-shine"></div>
+                💝
+            </div>
+        </section>
+
+        <!-- FINAL MESSAGE -->
+        <section class="final-section">
+            <div class="final-message">
+                Life with You is<br>
+                Sweeter Than Chocolate!
+            </div>
+            <div class="chocolate-stack">🍫🍫🍫</div>
+        </section>
+    </div>
+
+    <!-- SOUND TOGGLE -->
+    <div class="sound-toggle" id="soundToggle">🔊</div>
+
+    <script>
+        // CREATE CHOCOLATE DRIPS
+        const dripContainer = document.getElementById('dripContainer');
+        for (let i = 0; i < 15; i++) {
+            const drip = document.createElement('div');
+            drip.className = 'chocolate-drip';
+            drip.style.left = (i * 7) + '%';
+            drip.style.animationDelay = (Math.random() * 3) + 's';
+            drip.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            dripContainer.appendChild(drip);
+        }
+
+        // CREATE FLOATING CANDIES
+        const candyWrapper = document.getElementById('candyWrapper');
+        const candyEmojis = ['🍫', '🍬', '🍭', '🍩', '🧁', '🍰', '🍪', '🎂'];
+        
+        setInterval(() => {
+            const candy = document.createElement('div');
+            candy.className = 'floating-candy';
+            candy.textContent = candyEmojis[Math.floor(Math.random() * candyEmojis.length)];
+            candy.style.left = Math.random() * 100 + 'vw';
+            candy.style.animationDuration = (Math.random() * 8 + 10) + 's';
+            candy.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+            candyWrapper.appendChild(candy);
+
+            setTimeout(() => candy.remove(), 18000);
+        }, 800);
+
+        // CARD CLICK EFFECTS
+        document.querySelectorAll('.candy-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                createChocolateExplosion(e.clientX, e.clientY);
+                playSound('choco');
+                
+                // Card shake animation
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 10);
+            });
+
+            // 3D TILT ON HOVER
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 12;
+                const rotateY = (centerX - x) / 12;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px) scale(1.05) rotate(-2deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // CHOCOLATE EXPLOSION EFFECT
+        function createChocolateExplosion(x, y) {
+            const chocolates = ['🍫', '🍬', '🍭', '💖'];
+            
+            for (let i = 0; i < 25; i++) {
+                const choco = document.createElement('div');
+                choco.textContent = chocolates[Math.floor(Math.random() * chocolates.length)];
+                choco.style.position = 'fixed';
+                choco.style.left = x + 'px';
+                choco.style.top = y + 'px';
+                choco.style.fontSize = '2.5rem';
+                choco.style.pointerEvents = 'none';
+                choco.style.zIndex = '1000';
+                document.body.appendChild(choco);
+
+                const angle = (Math.PI * 2 * i) / 25;
+                const velocity = Math.random() * 6 + 4;
+                let posX = 0, posY = 0, gravity = 0.6, velocityY = Math.sin(angle) * velocity;
+
+                const animation = setInterval(() => {
+                    posX += Math.cos(angle) * velocity;
+                    posY += velocityY;
+                    velocityY += gravity;
+                    choco.style.transform = `translate(${posX}px, ${posY}px) rotate(${posX * 2}deg)`;
+                    choco.style.opacity = 1 - Math.abs(posY) / 150;
+                    
+                    if (Math.abs(posY) > 150 || parseFloat(choco.style.opacity) < 0.1) {
+                        clearInterval(animation);
+                        choco.remove();
+                    }
+                }, 16);
+            }
+        }
+
+        // SCROLL REVEAL ANIMATIONS
+        const observerOptions = { threshold: 0.2, rootMargin: '0px 0px -80px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) rotate(0deg)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.candy-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(80px) rotate(-5deg)';
+            card.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.275)';
+            card.style.transitionDelay = (index * 0.15) + 's';
+            observer.observe(card);
+        });
+
+        // AUDIO SYSTEM
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let soundEnabled = false;
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            if (type === 'choco') {
+                oscillator.frequency.value = 600;
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            }
+        }
+
+        document.getElementById('soundToggle').addEventListener('click', function() {
+            soundEnabled = !soundEnabled;
+            this.textContent = soundEnabled ? '🔊' : '🔇';
+            if (soundEnabled) {
+                playSound('choco');
+                this.style.background = 'linear-gradient(135deg, var(--strawberry), var(--gold-wrapper))';
+            } else {
+                this.style.background = 'linear-gradient(135deg, var(--caramel), var(--gold-wrapper))';
+            }
+        });
+
+        // RANDOM CHOCOLATE RAIN
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                createChocolateExplosion(
+                    Math.random() * window.innerWidth,
+                    Math.random() * 200
+                );
+            }
+        }, 3000);
+
+        // PERFORMANCE OPTIMIZATION
+        document.querySelectorAll('.candy-card, .chocolate-box, .wrapper-box').forEach(el => {
+            el.style.willChange = 'transform';
+        });
+
+        // WRAPPER BOX PAUSE ON HOVER
+        const wrapperBox = document.querySelector('.wrapper-box');
+        wrapperBox.addEventListener('mouseenter', function() {
+            this.style.animationPlayState = 'paused';
+        });
+        wrapperBox.addEventListener('mouseleave', function() {
+            this.style.animationPlayState = 'running';
+        });
+
+        // SWEETNESS METER RESTART ON CLICK
+        document.querySelector('.meter-container').addEventListener('click', function() {
+            const fill = document.querySelector('.sweetness-fill');
+            fill.style.animation = 'none';
+            setTimeout(() => {
+                fill.style.animation = 'fill-sweetness 4s ease-out forwards, shimmer-bar 3s linear infinite';
+            }, 10);
+            playSound('choco');
+        });
+    </script>
+</body>
+</html>

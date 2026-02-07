@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sacred Promises to You 💍</title>
+    <!-- SETUP: 1) Replace "My Forever" with her name (lines 310, 400, 680) -->
+    <!-- SETUP: 2) Customize promise messages in lines 410-480, colors in CSS variables (line 25-35) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* CUSTOMIZE COLORS HERE */
+            --royal-blue: #1e3a8a;
+            --sky-blue: #3b82f6;
+            --golden: #fbbf24;
+            --emerald: #10b981;
+            --silver: #cbd5e1;
+            --white: #ffffff;
+            --deep-purple: #581c87;
+            --crimson: #dc2626;
+            --teal: #14b8a6;
+            --gradient-1: #667eea;
+            --gradient-2: #764ba2;
+        }
+
+        body {
+            font-family: 'Georgia', 'Palatino Linotype', serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #334155 60%, #475569 100%);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* CONSTELLATION STARS */
+        .constellation-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* NORTHERN LIGHTS EFFECT */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.3), transparent),
+                        radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.2), transparent);
+            animation: aurora-shift 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes aurora-shift {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 0.6; transform: translateY(-20px); }
+        }
+
+        /* FLOATING OATH SCROLLS */
+        .scrolls-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .floating-scroll {
+            position: absolute;
+            font-size: 3rem;
+            animation: scroll-drift 20s linear infinite;
+            opacity: 0.7;
+            filter: drop-shadow(0 5px 15px rgba(251, 191, 36, 0.5));
+        }
+
+        @keyframes scroll-drift {
+            0% {
+                transform: translate(-10vw, 100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% {
+                transform: translate(110vw, -20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* SACRED OATH BOOK */
+        .oath-book-container {
+            position: relative;
+            width: 450px;
+            height: 450px;
+            margin-bottom: 60px;
+            perspective: 1500px;
+            animation: book-levitate 5s ease-in-out infinite;
+        }
+
+        @keyframes book-levitate {
+            0%, 100% { transform: translateY(0) rotateX(5deg); }
+            50% { transform: translateY(-30px) rotateX(-5deg); }
+        }
+
+        .oath-book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: book-open 6s ease-in-out infinite;
+        }
+
+        @keyframes book-open {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(-20deg); }
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--royal-blue), var(--deep-purple));
+            border: 8px solid var(--golden);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 
+                        inset 0 0 50px rgba(251, 191, 36, 0.2),
+                        0 0 100px rgba(59, 130, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: book-shimmer 3s linear infinite;
+        }
+
+        @keyframes book-shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .book-title {
+            font-size: 3rem;
+            color: var(--golden);
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 40px rgba(251, 191, 36, 0.5);
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        .book-seal {
+            font-size: 8rem;
+            animation: seal-glow 2s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes seal-glow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px var(--golden));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 50px var(--golden)) drop-shadow(0 0 80px var(--sky-blue));
+                transform: scale(1.1);
+            }
+        }
+
+        .book-ribbon {
+            position: absolute;
+            bottom: 30px;
+            font-size: 4rem;
+            animation: ribbon-wave 3s ease-in-out infinite;
+        }
+
+        @keyframes ribbon-wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* COSMIC RINGS */
+        .cosmic-ring {
+            position: absolute;
+            border: 3px solid rgba(251, 191, 36, 0.3);
+            border-radius: 50%;
+            animation: ring-expand 4s ease-out infinite;
+        }
+
+        .ring-1 { width: 350px; height: 350px; animation-delay: 0s; }
+        .ring-2 { width: 450px; height: 450px; animation-delay: 1s; }
+        .ring-3 { width: 550px; height: 550px; animation-delay: 2s; }
+
+        @keyframes ring-expand {
+            0% { 
+                transform: scale(0.8);
+                opacity: 0;
+                border-color: rgba(251, 191, 36, 0.6);
+            }
+            50% { 
+                opacity: 0.5;
+            }
+            100% { 
+                transform: scale(1.2);
+                opacity: 0;
+                border-color: rgba(59, 130, 246, 0.2);
+            }
+        }
+
+        /* MAIN TITLE */
+        .hero-title {
+            font-size: clamp(2.5rem, 10vw, 7rem);
+            text-align: center;
+            background: linear-gradient(45deg, var(--golden), var(--sky-blue), var(--emerald), var(--golden));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: promise-glow 6s ease infinite;
+            font-weight: bold;
+            text-shadow: 0 0 80px rgba(251, 191, 36, 0.5);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+        }
+
+        @keyframes promise-glow {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: drop-shadow(0 0 30px rgba(251, 191, 36, 0.6));
+            }
+            50% { 
+                background-position: 100% 50%;
+                filter: drop-shadow(0 0 60px rgba(59, 130, 246, 0.8));
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(1.5rem, 5vw, 2.8rem);
+            color: var(--silver);
+            text-align: center;
+            margin-bottom: 50px;
+            animation: subtitle-pulse 3s ease-in-out infinite;
+            font-style: italic;
+        }
+
+        @keyframes subtitle-pulse {
+            0%, 100% { opacity: 0.8; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-8px); }
+        }
+
+        /* SEAL BUTTON */
+        .seal-button {
+            padding: 30px 70px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--royal-blue), var(--deep-purple));
+            border: 5px solid var(--golden);
+            border-radius: 60px;
+            color: var(--golden);
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                        0 0 80px rgba(251, 191, 36, 0.4),
+                        inset 0 0 30px rgba(251, 191, 36, 0.2);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: seal-btn-glow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes seal-btn-glow {
+            0%, 100% { 
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                            0 0 80px rgba(251, 191, 36, 0.4);
+            }
+            50% { 
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                            0 0 120px rgba(59, 130, 246, 0.6);
+            }
+        }
+
+        .seal-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), 
+                        0 0 150px rgba(251, 191, 36, 0.8);
+        }
+
+        .seal-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .seal-button:active::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        /* PROMISE CARDS SECTION */
+        .promises-section {
+            padding: 120px 20px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            text-align: center;
+            color: var(--golden);
+            margin-bottom: 100px;
+            text-shadow: 0 0 40px rgba(251, 191, 36, 0.6);
+            animation: header-float 4s ease-in-out infinite;
+        }
+
+        @keyframes header-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .promises-timeline {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        .promises-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, 
+                var(--golden) 0%, 
+                var(--sky-blue) 25%, 
+                var(--emerald) 50%, 
+                var(--deep-purple) 75%, 
+                var(--crimson) 100%);
+            transform: translateX(-50%);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+            animation: timeline-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes timeline-glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.5); }
+            50% { box-shadow: 0 0 60px rgba(59, 130, 246, 0.8); }
+        }
+
+        .promise-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 70px);
+            position: relative;
+        }
+
+        .promise-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 70px);
+        }
+
+        .promise-badge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--golden), var(--sky-blue));
+            border-radius: 50%;
+            border: 6px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 0 50px rgba(251, 191, 36, 0.8), 
+                        0 0 100px rgba(59, 130, 246, 0.5);
+            animation: badge-rotate 5s linear infinite;
+            z-index: 10;
+        }
+
+        @keyframes badge-rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+            100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+        }
+
+        .promise-card {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(88, 28, 135, 0.8));
+            backdrop-filter: blur(20px);
+            border: 4px solid var(--golden);
+            border-radius: 35px;
+            padding: 60px 45px;
+            max-width: 600px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 
+                        inset 0 0 60px rgba(251, 191, 36, 0.1),
+                        0 0 100px rgba(59, 130, 246, 0.3);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .promise-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: rotate(45deg);
+            animation: card-shine 4s linear infinite;
+        }
+
+        @keyframes card-shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .promise-card:hover {
+            transform: translateY(-30px) scale(1.08);
+            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.7), 
+                        0 0 150px rgba(251, 191, 36, 0.6);
+            border-color: var(--sky-blue);
+        }
+
+        .promise-number {
+            font-size: 1.2rem;
+            color: var(--golden);
+            font-weight: bold;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .promise-title {
+            font-size: 2.5rem;
+            color: var(--golden);
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+
+        .promise-text {
+            font-size: 1.35rem;
+            line-height: 2;
+            color: var(--silver);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* OATH SIGNATURE SECTION */
+        .signature-section {
+            padding: 120px 20px;
+            text-align: center;
+            background: radial-gradient(circle, rgba(30, 58, 138, 0.3), transparent);
+        }
+
+        .signature-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(88, 28, 135, 0.6));
+            backdrop-filter: blur(15px);
+            padding: 80px 50px;
+            border-radius: 40px;
+            border: 5px solid var(--golden);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 
+                        0 0 120px rgba(251, 191, 36, 0.4);
+        }
+
+        .signature-title {
+            font-size: clamp(2rem, 6vw, 4rem);
+            color: var(--golden);
+            margin-bottom: 50px;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
+        }
+
+        .signature-line {
+            width: 100%;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--golden);
+            font-family: 'Brush Script MT', cursive;
+            border: 3px solid var(--golden);
+            box-shadow: inset 0 0 30px rgba(251, 191, 36, 0.2);
+            animation: signature-write 4s ease-in-out infinite;
+        }
+
+        @keyframes signature-write {
+            0%, 100% { 
+                box-shadow: inset 0 0 30px rgba(251, 191, 36, 0.2);
+            }
+            50% { 
+                box-shadow: inset 0 0 60px rgba(59, 130, 246, 0.4);
+            }
+        }
+
+        .oath-date {
+            margin-top: 40px;
+            font-size: 1.5rem;
+            color: var(--silver);
+            font-style: italic;
+        }
+
+        /* INFINITY PROMISE */
+        .infinity-section {
+            padding: 150px 20px;
+            text-align: center;
+        }
+
+        .infinity-symbol {
+            font-size: 15rem;
+            display: inline-block;
+            animation: infinity-rotate 10s linear infinite;
+            filter: drop-shadow(0 0 60px var(--golden)) 
+                    drop-shadow(0 0 100px var(--sky-blue));
+        }
+
+        @keyframes infinity-rotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .infinity-text {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            background: linear-gradient(45deg, white, var(--golden), var(--sky-blue), var(--emerald), white);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: infinity-gradient 8s ease infinite;
+            font-weight: bold;
+            line-height: 1.5;
+            margin-top: 40px;
+        }
+
+        @keyframes infinity-gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* FLOATING PROMISE NOTES */
+        .promise-note {
+            position: fixed;
+            font-size: 2.5rem;
+            animation: note-float 15s linear infinite;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+        }
+
+        @keyframes note-float {
+            0% {
+                transform: translate(0, 100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translate(50vw, -100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* SOUND TOGGLE */
+        .sound-toggle {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--deep-purple));
+            border: 4px solid var(--golden);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.4s;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 
+                        0 0 60px rgba(251, 191, 36, 0.5);
+            animation: sound-orbit 3s ease-in-out infinite;
+        }
+
+        @keyframes sound-orbit {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .sound-toggle:hover {
+            transform: scale(1.25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 
+                        0 0 100px rgba(251, 191, 36, 0.8);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .oath-book-container { width: 320px; height: 320px; }
+            .book-title { font-size: 2rem; }
+            .book-seal { font-size: 5rem; }
+            .promises-timeline::before { left: 30px; }
+            .promise-item, .promise-item:nth-child(even) {
+                padding-left: 100px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+            .promise-badge { left: 30px; }
+            .seal-button { padding: 20px 50px; font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- CONSTELLATION CANVAS -->
+    <canvas id="constellationCanvas" class="constellation-canvas"></canvas>
+
+    <!-- AURORA BACKGROUND -->
+    <div class="aurora-bg"></div>
+
+    <!-- FLOATING SCROLLS -->
+    <div class="scrolls-container" id="scrollsContainer"></div>
+
+    <div class="content-wrapper">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="oath-book-container">
+                <div class="cosmic-ring ring-1"></div>
+                <div class="cosmic-ring ring-2"></div>
+                <div class="cosmic-ring ring-3"></div>
+                
+                <div class="oath-book">
+                    <div class="book-cover">
+                        <div class="book-title">Sacred Oath</div>
+                        <div class="book-seal">💍</div>
+                        <div class="book-ribbon">🎗️</div>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="hero-title">My Eternal Promises</h1>
+            <p class="subtitle">My Forever, These Vows Are Written in the Stars...</p>
+            
+            <button class="seal-button" id="sealButton">Seal With Love 💖</button>
+        </section>
+
+        <!-- PROMISES TIMELINE -->
+        <section class="promises-section">
+            <h2 class="section-header">The Promises I Make to You ✨</h2>
+            
+            <div class="promises-timeline">
+                <div class="promise-item">
+                    <div class="promise-badge">💫</div>
+                    <div class="promise-card">
+                        <div class="promise-number">PROMISE ONE</div>
+                        <h3 class="promise-title">I Promise to Love You Unconditionally</h3>
+                        <p class="promise-text">Through every sunrise and sunset, through every storm and rainbow, my love for you will remain constant and unwavering. You will always have my heart, completely and forever.</p>
+                    </div>
+                </div>
+
+                <div class="promise-item">
+                    <div class="promise-badge">🌟</div>
+                    <div class="promise-card">
+                        <div class="promise-number">PROMISE TWO</div>
+                        <h3 class="promise-title">I Promise to Stand By Your Side</h3>
+                        <p class="promise-text">In your victories, I'll celebrate with you. In your challenges, I'll be your strength. You'll never face anything alone because I'll always be right there beside you, holding your hand.</p>
+                    </div>
+                </div>
+
+                <div class="promise-item">
+                    <div class="promise-badge">💎</div>
+                    <div class="promise-card">
+                        <div class="promise-number">PROMISE THREE</div>
+                        <h3 class="promise-title">I Promise to Cherish Every Moment</h3>
+                        <p class="promise-text">Every laugh, every conversation, every shared silence - I'll treasure them all. I promise to make every day special, to never take you for granted, and to always remind you how precious you are to me.</p>
+                    </div>
+                </div>
+
+                <div class="promise-item">
+                    <div class="promise-badge">🔥</div>
+                    <div class="promise-card">
+                        <div class="promise-number">PROMISE FOUR</div>
+                        <h3 class="promise-title">I Promise to Keep Our Love Alive</h3>
+                        <p class="promise-text">I'll never let the spark between us fade. Through surprises, adventures, and simple gestures of love, I'll make sure our romance stays as magical as the day we first fell in love.</p>
+                    </div>
+                </div>
+
+                <div class="promise-item">
+                    <div class="promise-badge">🌈</div>
+                    <div class="promise-card">
+                        <div class="promise-number">PROMISE FIVE</div>
+                        <h3 class="promise-title">I Promise to Be Your Safe Haven</h3>
+                        <p class="promise-text">Whenever the world feels too heavy, you can always find peace in my arms. I promise to be your comfort, your shelter, the place where you always feel understood, accepted, and loved.</p>
+                    </div>
+                </div>
+
+                <div class="promise-item">
+                    <div class="promise-badge">🦋</div>
+                    <div class="promise-card">
+                        <div class="promise-number">PROMISE SIX</div>
+                        <h3 class="promise-title">I Promise to Support Your Dreams</h3>
+                        <p class="promise-text">Your dreams are my dreams. I'll encourage you, believe in you, and help you reach every goal you set. Your success is my joy, and I'll be your biggest cheerleader every step of the way.</p>
+                    </div>
+                </div>
+
+                <div class="promise-item">
+                    <div class="promise-badge">⚡</div>
+                    <div class="promise-card">
+                        <div class="promise-number">PROMISE SEVEN</div>
+                        <h3 class="promise-title">I Promise to Choose You, Every Day</h3>
+                        <p class="promise-text">Love is a choice I make every single day, and I choose you - today, tomorrow, and for all our tomorrows. Through everything life brings, you will always be my choice, my priority, my forever.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIGNATURE SECTION -->
+        <section class="signature-section">
+            <div class="signature-container">
+                <h2 class="signature-title">Sealed With My Heart 💖</h2>
+                <div class="signature-line">Forever Yours</div>
+                <p class="oath-date">This Promise Day & Every Day After</p>
+            </div>
+        </section>
+
+        <!-- INFINITY PROMISE -->
+        <section class="infinity-section">
+            <div class="infinity-symbol">∞</div>
+            <div class="infinity-text">
+                These Promises Are<br>
+                Forever & Always
+            </div>
+        </section>
+    </div>
+
+    <!-- SOUND TOGGLE -->
+    <div class="sound-toggle" id="soundToggle">🔊</div>
+
+    <script>
+        // CONSTELLATION CANVAS
+        const canvas = document.getElementById('constellationCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        const starCount = 150;
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.opacity += this.twinkleSpeed;
+                if (this.opacity > 1 || this.opacity < 0.3) this.twinkleSpeed *= -1;
+                
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(251, 191, 36, ${this.opacity})`;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = 'rgba(251, 191, 36, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < starCount; i++) {
+            stars.push(new Star());
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw connections
+            ctx.shadowBlur = 0;
+            for (let i = 0; i < stars.length; i++) {
+                for (let j = i + 1; j < stars.length; j++) {
+                    const dx = stars[i].x - stars[j].x;
+                    const dy = stars[i].y - stars[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.2 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(stars[i].x, stars[i].y);
+                        ctx.lineTo(stars[j].x, stars[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // FLOATING SCROLLS
+        const scrollsContainer = document.getElementById('scrollsContainer');
+        const scrollEmojis = ['📜', '✉️', '📋', '📃'];
+        
+        setInterval(() => {
+            const scroll = document.createElement('div');
+            scroll.className = 'floating-scroll';
+            scroll.textContent = scrollEmojis[Math.floor(Math.random() * scrollEmojis.length)];
+            scroll.style.left = Math.random() * 100 + 'vw';
+            scroll.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            scroll.style.fontSize = (Math.random() * 2 + 2) + 'rem';
+            scrollsContainer.appendChild(scroll);
+
+            setTimeout(() => scroll.remove(), 25000);
+        }, 3000);
+
+        // FLOATING PROMISE NOTES
+        setInterval(() => {
+            const note = document.createElement('div');
+            note.className = 'promise-note';
+            note.textContent = ['💍', '💖', '✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 6)];
+            note.style.left = Math.random() * 100 + 'vw';
+            note.style.animationDuration = (Math.random() * 8 + 12) + 's';
+            document.body.appendChild(note);
+
+            setTimeout(() => note.remove(), 20000);
+        }, 1500);
+
+        // SEAL BUTTON INTERACTION
+        document.getElementById('sealButton').addEventListener('click', function() {
+            createPromiseExplosion();
+            playSound('seal');
+            
+            setTimeout(() => {
+                alert('💍✨ PROMISE SEALED ✨💍\n\nThese sacred promises are now eternal. My heart, my soul, and my forever are yours. I will keep these vows until the end of time and beyond. You are my everything! 💖');
+            }, 800);
+        });
+
+        // PROMISE EXPLOSION EFFECT
+        function createPromiseExplosion() {
+            const promiseEmojis = ['💍', '💖', '✨', '⭐', '💫', '🌟', '💎', '👑'];
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            for (let i = 0; i < 50; i++) {
+                const emoji = document.createElement('div');
+                emoji.textContent = promiseEmojis[Math.floor(Math.random() * promiseEmojis.length)];
+                emoji.style.position = 'fixed';
+                emoji.style.left = centerX + 'px';
+                emoji.style.top = centerY + 'px';
+                emoji.style.fontSize = (Math.random() * 2 + 2) + 'rem';
+                emoji.style.pointerEvents = 'none';
+                emoji.style.zIndex = '1000';
+                document.body.appendChild(emoji);
+
+                const angle = (Math.PI * 2 * i) / 50;
+                const velocity = Math.random() * 10 + 8;
+                let posX = 0, posY = 0, gravity = 0.6, velocityY = Math.sin(angle) * velocity;
+
+                const animation = setInterval(() => {
+                    posX += Math.cos(angle) * velocity;
+                    posY += velocityY;
+                    velocityY += gravity;
+                    emoji.style.transform = `translate(${posX}px, ${posY}px) rotate(${posX * 4}deg)`;
+                    emoji.style.opacity = 1 - Math.abs(posY) / 300;
+                    
+                    if (Math.abs(posY) > 300 || parseFloat(emoji.style.opacity) < 0.05) {
+                        clearInterval(animation);
+                        emoji.remove();
+                    }
+                }, 16);
+            }
+        }
+
+        // PROMISE CARDS INTERACTIONS
+        document.querySelectorAll('.promise-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                createSparkles(e.clientX, e.clientY);
+                playSound('promise');
+            });
+
+            // 3D TILT EFFECT
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+                
+                card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-30px) scale(1.08)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // SPARKLES EFFECT
+        function createSparkles(x, y) {
+            const sparkles = ['✨', '⭐', '💫', '🌟'];
+            
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                sparkle.style.fontSize = '2rem';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '1000';
+                document.body.appendChild(sparkle);
+
+                const angle = (Math.PI * 2 * i) / 20;
+                const velocity = Math.random() * 6 + 4;
+                let posX = 0, posY = 0;
+
+                const animation = setInterval(() => {
+                    posX += Math.cos(angle) * velocity;
+                    posY += Math.sin(angle) * velocity;
+                    sparkle.style.transform = `translate(${posX}px, ${posY}px) rotate(${posX * 3}deg) scale(${1 - Math.abs(posX)/120})`;
+                    sparkle.style.opacity = 1 - Math.abs(posX) / 120;
+                    
+                    if (Math.abs(posX) > 120) {
+                        clearInterval(animation);
+                        sparkle.remove();
+                    }
+                }, 16);
+            }
+        }
+
+        // SCROLL REVEAL ANIMATIONS
+        const observerOptions = { threshold: 0.2, rootMargin: '0px 0px -100px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0) translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.promise-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            const isEven = index % 2 === 0;
+            card.style.transform = isEven ? 'translateX(-150px) translateY(80px)' : 'translateX(150px) translateY(80px)';
+            card.style.transition = 'all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.675)';
+            card.style.transitionDelay = (index * 0.2) + 's';
+            observer.observe(card);
+        });
+
+        // AUDIO SYSTEM
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let soundEnabled = false;
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            
+            if (type === 'seal') {
+                [523, 659, 784, 1047, 1319].forEach((freq, i) => {
+                    setTimeout(() => {
+                        const osc = audioContext.createOscillator();
+                        const gain = audioContext.createGain();
+                        osc.connect(gain);
+                        gain.connect(audioContext.destination);
+                        osc.frequency.value = freq;
+                        osc.type = 'sine';
+                        gain.gain.setValueAtTime(0.25, audioContext.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                        osc.start(audioContext.currentTime);
+                        osc.stop(audioContext.currentTime + 0.5);
+                    }, i * 120);
+                });
+            } else if (type === 'promise') {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.frequency.value = 880;
+                osc.type = 'sine';
+                gain.gain.setValueAtTime(0.2, audioContext.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                osc.start(audioContext.currentTime);
+                osc.stop(audioContext.currentTime + 0.3);
+            }
+        }
+
+        document.getElementById('soundToggle').addEventListener('click', function() {
+            soundEnabled = !soundEnabled;
+            this.textContent = soundEnabled ? '🔊' : '🔇';
+            if (soundEnabled) {
+                playSound('promise');
+                this.style.borderColor = 'var(--sky-blue)';
+            } else {
+                this.style.borderColor = 'var(--golden)';
+            }
+        });
+
+        // PERFORMANCE OPTIMIZATION
+        document.querySelectorAll('.promise-card, .oath-book, .infinity-symbol').forEach(el => {
+            el.style.willChange = 'transform';
+        });
+    </script>
+</body>
+</html>

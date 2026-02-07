@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrapped in Your Love - Hug Day 🤗</title>
+    <!-- SETUP: 1) Replace "My Love" with her name (lines 315, 405, 710) -->
+    <!-- SETUP: 2) Customize hug messages in lines 415-485, colors in CSS variables (line 25-35) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* CUSTOMIZE COLORS HERE */
+            --warm-pink: #ff6b9d;
+            --soft-coral: #ff8a80;
+            --peachy: #ffab91;
+            --lavender: #ce93d8;
+            --sky: #81d4fa;
+            --mint: #80cbc4;
+            --cream: #fff8e1;
+            --rose-gold: #e91e63;
+            --pastel-purple: #b39ddb;
+            --sunset-orange: #ff7043;
+        }
+
+        body {
+            font-family: 'Brush Script MT', 'Segoe Script', cursive;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #fff0f6 0%, #ffe4e9 25%, #ffd4e5 50%, #ffc1d9 75%, #ffb3d0 100%);
+            background-attachment: fixed;
+            color: #5e3023;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* WARM GLOW OVERLAY */
+        .warm-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 107, 157, 0.2), transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(206, 147, 216, 0.2), transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+            animation: glow-pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* FLOATING HEARTS */
+        .hearts-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: heart-float 12s ease-in-out infinite;
+            opacity: 0.6;
+            filter: drop-shadow(0 5px 15px rgba(255, 107, 157, 0.4));
+        }
+
+        @keyframes heart-float {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            50% {
+                transform: translateY(50vh) translateX(50px) rotate(180deg) scale(1);
+            }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(-10vh) translateX(-30px) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* WARM EMBRACE WAVES */
+        .embrace-waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23ff6b9d" fill-opacity="0.2"/></svg>') repeat-x;
+            animation: wave-motion 15s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23ce93d8" fill-opacity="0.2"/></svg>') repeat-x;
+            animation: wave-motion 20s linear infinite reverse;
+            opacity: 0.7;
+        }
+
+        @keyframes wave-motion {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* HUGGING COUPLE ANIMATION */
+        .hug-animation-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin-bottom: 60px;
+            animation: container-breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes container-breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .embrace-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.3), rgba(206, 147, 216, 0.2), transparent);
+            animation: circle-expand 3s ease-in-out infinite;
+            box-shadow: 0 0 80px rgba(255, 107, 157, 0.5), inset 0 0 60px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes circle-expand {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.9;
+            }
+        }
+
+        .hug-emojis {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 20px;
+            font-size: 10rem;
+            animation: hug-squeeze 3s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(255, 107, 157, 0.5));
+        }
+
+        @keyframes hug-squeeze {
+            0%, 100% { 
+                gap: 20px;
+                transform: translate(-50%, -50%);
+            }
+            50% { 
+                gap: -10px;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .person-left {
+            animation: person-move-left 3s ease-in-out infinite;
+        }
+
+        .person-right {
+            animation: person-move-right 3s ease-in-out infinite;
+        }
+
+        @keyframes person-move-left {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        @keyframes person-move-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
+        }
+
+        /* LOVE RAYS */
+        .love-ray {
+            position: absolute;
+            width: 4px;
+            height: 150px;
+            background: linear-gradient(180deg, var(--warm-pink), transparent);
+            top: 50%;
+            left: 50%;
+            transform-origin: center bottom;
+            animation: ray-rotate 8s linear infinite;
+            opacity: 0.5;
+        }
+
+        .ray-1 { animation-delay: 0s; }
+        .ray-2 { animation-delay: 1s; }
+        .ray-3 { animation-delay: 2s; }
+        .ray-4 { animation-delay: 3s; }
+        .ray-5 { animation-delay: 4s; }
+        .ray-6 { animation-delay: 5s; }
+
+        @keyframes ray-rotate {
+            0% { transform: translate(-50%, -100%) rotate(0deg); }
+            100% { transform: translate(-50%, -100%) rotate(360deg); }
+        }
+
+        /* SPARKLE HEARTS */
+        .sparkle-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: sparkle-orbit 5s ease-in-out infinite;
+        }
+
+        .sparkle-1 { top: 15%; left: 20%; animation-delay: 0s; }
+        .sparkle-2 { top: 20%; right: 15%; animation-delay: 0.7s; }
+        .sparkle-3 { bottom: 25%; left: 15%; animation-delay: 1.4s; }
+        .sparkle-4 { bottom: 20%; right: 20%; animation-delay: 2.1s; }
+        .sparkle-5 { top: 40%; left: 5%; animation-delay: 2.8s; }
+        .sparkle-6 { top: 45%; right: 5%; animation-delay: 3.5s; }
+
+        @keyframes sparkle-orbit {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.6;
+                filter: drop-shadow(0 0 10px var(--warm-pink));
+            }
+            50% { 
+                transform: scale(1.4) rotate(180deg);
+                opacity: 1;
+                filter: drop-shadow(0 0 30px var(--warm-pink));
+            }
+        }
+
+        /* MAIN TITLE */
+        .hero-title {
+            font-size: clamp(2.5rem, 10vw, 7rem);
+            text-align: center;
+            background: linear-gradient(45deg, var(--warm-pink), var(--lavender), var(--peachy), var(--warm-pink));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: romantic-glow 5s ease infinite;
+            font-weight: bold;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 60px rgba(255, 107, 157, 0.4);
+        }
+
+        @keyframes romantic-glow {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.5));
+            }
+            50% { 
+                background-position: 100% 50%;
+                filter: drop-shadow(0 0 40px rgba(206, 147, 216, 0.7));
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(1.5rem, 5vw, 2.8rem);
+            color: var(--warm-pink);
+            text-align: center;
+            margin-bottom: 50px;
+            animation: subtitle-sway 3s ease-in-out infinite;
+            font-family: 'Segoe Script', cursive;
+            text-shadow: 2px 2px 10px rgba(255, 107, 157, 0.3);
+        }
+
+        @keyframes subtitle-sway {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* HUG ME BUTTON */
+        .hug-button {
+            padding: 28px 70px;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--warm-pink), var(--lavender));
+            border: 6px solid white;
+            border-radius: 70px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.6), 
+                        0 0 80px rgba(206, 147, 216, 0.4),
+                        inset 0 0 30px rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: button-heartbeat 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes button-heartbeat {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.05); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.05); }
+            40% { transform: scale(1); }
+        }
+
+        .hug-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.8s, height 0.8s;
+        }
+
+        .hug-button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 30px 70px rgba(255, 107, 157, 0.8), 
+                        0 0 120px rgba(206, 147, 216, 0.6);
+        }
+
+        .hug-button:active::before {
+            width: 500px;
+            height: 500px;
+        }
+
+        /* HUG REASONS SECTION */
+        .hugs-section {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            text-align: center;
+            color: var(--warm-pink);
+            margin-bottom: 100px;
+            text-shadow: 3px 3px 15px rgba(255, 107, 157, 0.4);
+            animation: title-bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes title-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hugs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 70px;
+        }
+
+        .hug-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 246, 0.95));
+            border: 5px solid var(--warm-pink);
+            border-radius: 45px;
+            padding: 60px 40px;
+            position: relative;
+            overflow: visible;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 25px 60px rgba(255, 107, 157, 0.4), 
+                        inset 0 0 40px rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .hug-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--lavender), var(--peachy));
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(206, 147, 216, 0.5);
+            animation: badge-float 3s ease-in-out infinite;
+        }
+
+        @keyframes badge-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        .hug-card::after {
+            content: '🤗';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 3.5rem;
+            z-index: 1;
+            animation: emoji-spin 4s ease-in-out infinite;
+        }
+
+        @keyframes emoji-spin {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(20deg); }
+        }
+
+        .hug-card:hover {
+            transform: translateY(-30px) scale(1.05);
+            box-shadow: 0 40px 90px rgba(255, 107, 157, 0.6), 
+                        0 0 100px rgba(206, 147, 216, 0.5);
+            border-color: var(--lavender);
+        }
+
+        .card-heart-icon {
+            font-size: 6rem;
+            text-align: center;
+            margin-bottom: 30px;
+            display: inline-block;
+            animation: icon-pulse 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 10px 25px rgba(255, 107, 157, 0.4));
+        }
+
+        @keyframes icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .card-title {
+            font-size: 2.5rem;
+            color: var(--warm-pink);
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(255, 107, 157, 0.3);
+        }
+
+        .card-message {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #5e3023;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* WARM EMBRACE COUNTER */
+        .embrace-counter-section {
+            padding: 120px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+        }
+
+        .counter-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 228, 233, 0.9));
+            padding: 80px 60px;
+            border-radius: 50px;
+            border: 6px solid var(--warm-pink);
+            box-shadow: 0 35px 80px rgba(255, 107, 157, 0.5);
+        }
+
+        .counter-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--warm-pink);
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 10px rgba(255, 107, 157, 0.3);
+        }
+
+        .embrace-bar {
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(90deg, var(--peachy), var(--soft-coral));
+            border-radius: 35px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .embrace-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--warm-pink), var(--lavender), var(--peachy));
+            background-size: 200% 100%;
+            width: 0;
+            animation: fill-embrace 5s ease-out forwards, shimmer-embrace 3s linear infinite;
+            position: relative;
+            box-shadow: 0 0 50px var(--warm-pink);
+        }
+
+        @keyframes fill-embrace {
+            to { width: 100%; }
+        }
+
+        @keyframes shimmer-embrace {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .embrace-fill::after {
+            content: '∞ Hugs Forever! 🤗';
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            color: white;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* INTERACTIVE HUG ZONE */
+        .interactive-hug-section {
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .hug-zone {
+            width: 400px;
+            height: 400px;
+            margin: 80px auto;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.3), rgba(206, 147, 216, 0.3));
+            border: 8px dashed var(--warm-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 30px 70px rgba(255, 107, 157, 0.4), 
+                        inset 0 0 60px rgba(255, 255, 255, 0.5);
+            animation: zone-pulse 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes zone-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                border-color: var(--warm-pink);
+            }
+            50% { 
+                transform: scale(1.05);
+                border-color: var(--lavender);
+            }
+        }
+
+        .hug-zone:hover {
+            transform: scale(1.15);
+            box-shadow: 0 40px 100px rgba(255, 107, 157, 0.6);
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.5), rgba(206, 147, 216, 0.5));
+        }
+
+        .hug-zone::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: zone-shimmer 2s linear infinite;
+        }
+
+        @keyframes zone-shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* FINAL MESSAGE */
+        .final-section {
+            padding: 150px 20px;
+            text-align: center;
+        }
+
+        .final-message {
+            font-size: clamp(2.5rem, 8vw, 6.5rem);
+            background: linear-gradient(45deg, white, var(--warm-pink), var(--lavender), var(--peachy), white);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: final-rainbow 7s ease infinite;
+            font-weight: bold;
+            line-height: 1.4;
+            margin-bottom: 60px;
+        }
+
+        @keyframes final-rainbow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .embrace-emoji-group {
+            font-size: 6rem;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            animation: group-hug 3s ease-in-out infinite;
+        }
+
+        @keyframes group-hug {
+            0%, 100% { gap: 30px; }
+            50% { gap: 10px; transform: scale(1.1); }
+        }
+
+        /* SOUND TOGGLE */
+        .sound-toggle {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--warm-pink), var(--lavender));
+            border: 5px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.4s;
+            box-shadow: 0 15px 45px rgba(255, 107, 157, 0.6), 
+                        0 0 70px rgba(206, 147, 216, 0.4);
+            animation: sound-float 3s ease-in-out infinite;
+        }
+
+        @keyframes sound-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(180deg); }
+        }
+
+        .sound-toggle:hover {
+            transform: scale(1.2);
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.8), 
+                        0 0 100px rgba(206, 147, 216, 0.6);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hug-animation-container { width: 350px; height: 350px; }
+            .embrace-circle { width: 300px; height: 300px; }
+            .hug-emojis { font-size: 7rem; }
+            .hugs-grid { grid-template-columns: 1fr; }
+            .hug-zone { width: 300px; height: 300px; font-size: 6rem; }
+            .hug-button { padding: 22px 50px; font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- WARM GLOW -->
+    <div class="warm-glow"></div>
+
+    <!-- FLOATING HEARTS BACKGROUND -->
+    <div class="hearts-background" id="heartsBackground"></div>
+
+    <!-- EMBRACE WAVES -->
+    <div class="embrace-waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="content-wrapper">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hug-animation-container">
+                <div class="embrace-circle"></div>
+                
+                <div class="love-ray ray-1"></div>
+                <div class="love-ray ray-2"></div>
+                <div class="love-ray ray-3"></div>
+                <div class="love-ray ray-4"></div>
+                <div class="love-ray ray-5"></div>
+                <div class="love-ray ray-6"></div>
+
+                <div class="hug-emojis">
+                    <span class="person-left">🧑</span>
+                    <span class="person-right">👩</span>
+                </div>
+
+                <div class="sparkle-heart sparkle-1">💕</div>
+                <div class="sparkle-heart sparkle-2">💖</div>
+                <div class="sparkle-heart sparkle-3">💗</div>
+                <div class="sparkle-heart sparkle-4">💝</div>
+                <div class="sparkle-heart sparkle-5">💓</div>
+                <div class="sparkle-heart sparkle-6">💞</div>
+            </div>
+
+            <h1 class="hero-title">Happy Hug Day!</h1>
+            <p class="subtitle">My Love, I'm Sending You The Warmest Virtual Hug 🤗</p>
+            
+            <button class="hug-button" id="hugButton">Hug Me Back! 💕</button>
+        </section>
+
+        <!-- HUG REASONS CARDS -->
+        <section class="hugs-section">
+            <h2 class="section-title">Why I Love Hugging You 🤗💖</h2>
+            
+            <div class="hugs-grid">
+                <div class="hug-card">
+                    <div class="card-heart-icon">💕</div>
+                    <h3 class="card-title">Your Warmth</h3>
+                    <p class="card-message">In your arms, I find the warmth that melts away all my worries. Your hugs are like sunshine on a cloudy day, filling my heart with light and love.</p>
+                </div>
+
+                <div class="hug-card">
+                    <div class="card-heart-icon">🌟</div>
+                    <h3 class="card-title">Safe Haven</h3>
+                    <p class="card-message">Your embrace is my safe place in this chaotic world. When you hold me close, everything else fades away and I feel completely protected and cherished.</p>
+                </div>
+
+                <div class="hug-card">
+                    <div class="card-heart-icon">💖</div>
+                    <h3 class="card-title">Heart Connection</h3>
+                    <p class="card-message">When we hug, our hearts beat in perfect harmony. I can feel your love flowing through me, and in that moment, we're one soul sharing infinite affection.</p>
+                </div>
+
+                <div class="hug-card">
+                    <div class="card-heart-icon">✨</div>
+                    <h3 class="card-title">Perfect Fit</h3>
+                    <p class="card-message">Your arms were made to hold me - we fit together perfectly, like two puzzle pieces designed for each other. Every hug feels like coming home.</p>
+                </div>
+
+                <div class="hug-card">
+                    <div class="card-heart-icon">🌈</div>
+                    <h3 class="card-title">Healing Touch</h3>
+                    <p class="card-message">Your hugs have magical healing powers. They can turn my tears into smiles, my sadness into joy, my stress into peace. You're my comfort and my cure.</p>
+                </div>
+
+                <div class="hug-card">
+                    <div class="card-heart-icon">💫</div>
+                    <h3 class="card-title">Forever Feeling</h3>
+                    <p class="card-message">I could stay wrapped in your arms forever. Your hugs make time stand still, and in those moments, I realize that with you, I have everything I'll ever need.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EMBRACE COUNTER -->
+        <section class="embrace-counter-section">
+            <div class="counter-container">
+                <h2 class="counter-title">Hugs I Want to Give You 🤗</h2>
+                <div class="embrace-bar">
+                    <div class="embrace-fill"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE HUG ZONE -->
+        <section class="interactive-hug-section">
+            <h2 class="section-title">Click for a Virtual Hug! 💕</h2>
+            <div class="hug-zone" id="hugZone">
+                🤗
+            </div>
+        </section>
+
+        <!-- FINAL MESSAGE -->
+        <section class="final-section">
+            <div class="final-message">
+                Forever In<br>
+                Your Arms! 🤗💕
+            </div>
+            <div class="embrace-emoji-group">
+                <span>🧑</span>
+                <span>💖</span>
+                <span>👩</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- SOUND TOGGLE -->
+    <div class="sound-toggle" id="soundToggle">🔊</div>
+
+    <script>
+        // FLOATING HEARTS BACKGROUND
+        const heartsBackground = document.getElementById('heartsBackground');
+        const heartEmojis = ['💕', '💖', '💗', '💝', '💓', '💞', '❤️', '🧡', '💛', '💚'];
+
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 8 + 10) + 's';
+            heart.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+            heart.style.animationDelay = (Math.random() * 2) + 's';
+            heartsBackground.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 20000);
+        }, 800);
+
+        // HUG BUTTON INTERACTION
+        document.getElementById('hugButton').addEventListener('click', function() {
+            createMassiveHugExplosion();
+            playSound('hug');
+            
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'button-heartbeat 2s ease-in-out infinite';
+            }, 10);
+
+            setTimeout(() => {
+                alert('🤗💕 *BIGGEST HUG EVER* 💕🤗\n\nI\'m wrapping my arms around you through the screen! Feel my warmth, my love, and my heartbeat. You mean absolutely everything to me! I wish I could hold you forever! 💖✨');
+            }, 600);
+        });
+
+        // MASSIVE HUG EXPLOSION
+        function createMassiveHugExplosion() {
+            const hugEmojis = ['🤗', '💕', '💖', '💗', '💝', '💓', '💞', '🫂', '❤️', '✨', '⭐', '🌟'];
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            for (let i = 0; i < 60; i++) {
+                const emoji = document.createElement('div');
+                emoji.textContent = hugEmojis[Math.floor(Math.random() * hugEmojis.length)];
+                emoji.style.position = 'fixed';
+                emoji.style.left = centerX + 'px';
+                emoji.style.top = centerY + 'px';
+                emoji.style.fontSize = (Math.random() * 3 + 2) + 'rem';
+                emoji.style.pointerEvents = 'none';
+                emoji.style.zIndex = '1000';
+                document.body.appendChild(emoji);
+
+                const angle = (Math.PI * 2 * i) / 60;
+                const velocity = Math.random() * 12 + 8;
+                let posX = 0, posY = 0, gravity = 0.7, velocityY = Math.sin(angle) * velocity;
+
+                const animation = setInterval(() => {
+                    posX += Math.cos(angle) * velocity;
+                    posY += velocityY;
+                    velocityY += gravity;
+                    emoji.style.transform = `translate(${posX}px, ${posY}px) rotate(${posX * 5}deg)`;
+                    emoji.style.opacity = 1 - Math.abs(posY) / 400;
+                    
+                    if (Math.abs(posY) > 400 || parseFloat(emoji.style.opacity) < 0.05) {
+                        clearInterval(animation);
+                        emoji.remove();
+                    }
+                }, 16);
+            }
+        }
+
+        // HUG ZONE INTERACTION
+        const hugZone = document.getElementById('hugZone');
+        let hugCount = 0;
+
+        hugZone.addEventListener('click', function() {
+            hugCount++;
+            createWarmthWaves(this);
+            playSound('warmth');
+            
+            // Change emoji on each click
+            const hugVariants = ['🤗', '🫂', '💕', '💖', '🥰', '😊'];
+            this.textContent = hugVariants[hugCount % hugVariants.length];
+            
+            // Trigger animation
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'zone-pulse 3s ease-in-out infinite';
+            }, 10);
+
+            // Show sweet message every 5 hugs
+            if (hugCount % 5 === 0) {
+                setTimeout(() => {
+                    alert(`💕 ${hugCount} Hugs and counting! 💕\n\nYou can never have too many hugs from the one you love! Keep clicking! 🤗✨`);
+                }, 300);
+            }
+        });
+
+        // WARMTH WAVES EFFECT
+        function createWarmthWaves(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const wave = document.createElement('div');
+                    wave.style.position = 'fixed';
+                    wave.style.left = centerX + 'px';
+                    wave.style.top = centerY + 'px';
+                    wave.style.width = '50px';
+                    wave.style.height = '50px';
+                    wave.style.border = '3px solid var(--warm-pink)';
+                    wave.style.borderRadius = '50%';
+                    wave.style.pointerEvents = 'none';
+                    wave.style.zIndex = '999';
+                    document.body.appendChild(wave);
+
+                    let size = 50;
+                    const expansion = setInterval(() => {
+                        size += 20;
+                        wave.style.width = size + 'px';
+                        wave.style.height = size + 'px';
+                        wave.style.transform = 'translate(-50%, -50%)';
+                        wave.style.opacity = 1 - size / 500;
+                        
+                        if (size > 500) {
+                            clearInterval(expansion);
+                            wave.remove();
+                        }
+                    }, 30);
+                }, i * 150);
+            }
+        }
+
+        // HUG CARDS INTERACTIONS
+        document.querySelectorAll('.hug-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                createHeartBurst(e.clientX, e.clientY);
+                playSound('card');
+            });
+
+            // 3D TILT EFFECT
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 12;
+                const rotateY = (centerX - x) / 12;
+                
+                card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-30px) scale(1.05)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // HEART BURST EFFECT
+        function createHeartBurst(x, y) {
+            const hearts = ['💕', '💖', '💗', '💝', '💓', '💞'];
+            
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.position = 'fixed';
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '1000';
+                document.body.appendChild(heart);
+
+                const angle = (Math.PI * 2 * i) / 25;
+                const velocity = Math.random() * 7 + 5;
+                let posX = 0, posY = 0;
+
+                const animation = setInterval(() => {
+                    posX += Math.cos(angle) * velocity;
+                    posY += Math.sin(angle) * velocity;
+                    heart.style.transform = `translate(${posX}px, ${posY}px) rotate(${posX * 4}deg) scale(${1 - Math.abs(posX)/150})`;
+                    heart.style.opacity = 1 - Math.abs(posX) / 150;
+                    
+                    if (Math.abs(posX) > 150) {
+                        clearInterval(animation);
+                        heart.remove();
+                    }
+                }, 16);
+            }
+        }
+
+        // SCROLL REVEAL ANIMATIONS
+        const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -100px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.hug-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(100px)';
+            card.style.transition = 'all 1s cubic-bezier(0.68, -0.55, 0.265, 1.275)';
+            card.style.transitionDelay = (index * 0.15) + 's';
+            observer.observe(card);
+        });
+
+        // AUDIO SYSTEM
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let soundEnabled = false;
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            
+            if (type === 'hug') {
+                [400, 500, 600, 700, 800, 900, 1000].forEach((freq, i) => {
+                    setTimeout(() => {
+                        const osc = audioContext.createOscillator();
+                        const gain = audioContext.createGain();
+                        osc.connect(gain);
+                        gain.connect(audioContext.destination);
+                        osc.frequency.value = freq;
+                        osc.type = 'sine';
+                        gain.gain.setValueAtTime(0.2, audioContext.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                        osc.start(audioContext.currentTime);
+                        osc.stop(audioContext.currentTime + 0.4);
+                    }, i * 80);
+                });
+            } else if (type === 'warmth') {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.frequency.value = 700;
+                osc.type = 'sine';
+                gain.gain.setValueAtTime(0.25, audioContext.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                osc.start(audioContext.currentTime);
+                osc.stop(audioContext.currentTime + 0.5);
+            } else if (type === 'card') {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.frequency.value = 900;
+                osc.type = 'sine';
+                gain.gain.setValueAtTime(0.2, audioContext.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                osc.start(audioContext.currentTime);
+                osc.stop(audioContext.currentTime + 0.3);
+            }
+        }
+
+        document.getElementById('soundToggle').addEventListener('click', function() {
+            soundEnabled = !soundEnabled;
+            this.textContent = soundEnabled ? '🔊' : '🔇';
+            if (soundEnabled) {
+                playSound('warmth');
+                this.style.background = 'linear-gradient(135deg, var(--lavender), var(--peachy))';
+            } else {
+                this.style.background = 'linear-gradient(135deg, var(--warm-pink), var(--lavender))';
+            }
+        });
+
+        // PERFORMANCE OPTIMIZATION
+        document.querySelectorAll('.hug-card, .hug-animation-container, .hug-zone').forEach(el => {
+            el.style.willChange = 'transform';
+        });
+
+        // RANDOM AMBIENT HEARTS
+        setInterval(() => {
+            if (Math.random() > 0.6) {
+                createHeartBurst(
+                    Math.random() * window.innerWidth,
+                    Math.random() * 300
+                );
+            }
+        }, 4000);
+    </script>
+</body>
+</html>
