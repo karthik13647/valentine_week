@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Rose Day My Love ❤️</title>
+    <!-- SETUP: 1) Replace "My Darling" with her name (line 250, 340, 520) -->
+    <!-- SETUP: 2) Customize messages in lines 350-390, colors in CSS variables (line 25-35) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* CUSTOMIZE COLORS HERE */
+            --primary-rose: #ff1744;
+            --secondary-rose: #ff4569;
+            --gold: #ffd700;
+            --dark-bg: #1a0000;
+            --light-rose: #ffe6eb;
+            --glow-color: #ff006e;
+            --card-bg: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            background: radial-gradient(circle at 50% 50%, #2d0a0a, #0d0000);
+            color: white;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .heartbeat-bg {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary-rose) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            opacity: 0.3;
+            filter: blur(60px);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 5rem);
+            text-align: center;
+            background: linear-gradient(45deg, var(--gold), var(--primary-rose), var(--gold));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite, float 3s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(255, 23, 68, 0.6);
+            margin-bottom: 30px;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .typewriter-text {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: var(--light-rose);
+            overflow: hidden;
+            border-right: 3px solid var(--gold);
+            white-space: nowrap;
+            animation: typing 4s steps(40) infinite, blink 0.7s step-end infinite;
+            max-width: fit-content;
+        }
+
+        @keyframes typing {
+            0%, 90%, 100% { width: 0; }
+            30%, 60% { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* GLASS CARDS */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 23, 68, 0.3), 0 0 60px rgba(255, 215, 0, 0.2);
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: breathe 4s ease-in-out infinite;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-rose), var(--gold), var(--secondary-rose), var(--gold));
+            background-size: 300% 300%;
+            border-radius: 20px;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.02) translateY(-5px); }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.3; background-position: 0% 50%; }
+            50% { opacity: 0.6; background-position: 100% 50%; }
+        }
+
+        .glass-card:hover {
+            transform: scale(1.05) rotateY(5deg) translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255, 23, 68, 0.5), 0 0 100px rgba(255, 215, 0, 0.4);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .card-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--light-rose);
+        }
+
+        /* LOVE METER */
+        .love-meter {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .meter-title {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .meter-bar {
+            width: 100%;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-rose), var(--gold));
+            width: 0;
+            animation: fill-meter 3s ease-out forwards;
+            position: relative;
+            box-shadow: 0 0 30px var(--glow-color);
+        }
+
+        @keyframes fill-meter {
+            to { width: 100%; }
+        }
+
+        .meter-fill::after {
+            content: '∞';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: white;
+            animation: sparkle-icon 1s ease-in-out infinite;
+        }
+
+        @keyframes sparkle-icon {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateY(-50%) scale(1.2); }
+        }
+
+        /* PHOTO FRAME */
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 60px auto;
+            perspective: 1000px;
+        }
+
+        .frame-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate3d 10s linear infinite;
+            border-radius: 20px;
+            background: linear-gradient(45deg, var(--primary-rose), var(--gold));
+            padding: 10px;
+            box-shadow: 0 20px 60px rgba(255, 23, 68, 0.4);
+        }
+
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .frame-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        /* FLOATING ROSES */
+        .floating-rose {
+            position: fixed;
+            font-size: 2rem;
+            animation: orbit 20s linear infinite;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+        }
+
+        /* FALLING PETALS */
+        .petal {
+            position: fixed;
+            font-size: 1.5rem;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* FINAL SECTION */
+        .final-message {
+            text-align: center;
+            padding: 100px 20px;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
+            50% { text-shadow: 0 0 60px rgba(255, 215, 0, 0.9), 0 0 90px rgba(255, 23, 68, 0.5); }
+        }
+
+        .eternal-rose {
+            font-size: 5rem;
+            display: inline-block;
+            animation: bloom 4s ease-in-out infinite;
+        }
+
+        @keyframes bloom {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(180deg); }
+        }
+
+        /* AUDIO TOGGLE */
+        .audio-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px var(--glow-color);
+        }
+
+        .audio-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px var(--gold);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .cards-container { grid-template-columns: 1fr; }
+            .floating-rose { font-size: 1.5rem; }
+            @keyframes orbit {
+                0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <div class="content-wrapper">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="heartbeat-bg"></div>
+            <h1 class="hero-title">Happy Rose Day, Bangaram ❤️</h1>
+            <p class="typewriter-text">You're the rose in my garden of life...</p>
+        </section>
+
+        <!-- MESSAGE CARDS -->
+        <div class="cards-container">
+            <div class="glass-card" data-tilt>
+                <div class="card-icon">🌹</div>
+                <h3 class="card-title">My Forever Rose</h3>
+                <p class="card-message">Like a rose that never wilts, my love for you grows stronger with each passing day. You bring color to my world.</p>
+            </div>
+
+            <div class="glass-card" data-tilt>
+                <div class="card-icon">💖</div>
+                <h3 class="card-title">Heartbeats in Sync</h3>
+                <p class="card-message">Every beat of my heart whispers your name. You're the rhythm that makes my life a beautiful melody.</p>
+            </div>
+
+            <div class="glass-card" data-tilt>
+                <div class="card-icon">✨</div>
+                <h3 class="card-title">You're My Sparkle</h3>
+                <p class="card-message">Your smile lights up my darkest days like stars illuminate the night sky. You're my everything.</p>
+            </div>
+
+            <div class="glass-card" data-tilt>
+                <div class="card-icon">🌟</div>
+                <h3 class="card-title">Infinite Moments</h3>
+                <p class="card-message">Every moment with you feels like a precious gem. I cherish our memories and dream of creating countless more.</p>
+            </div>
+
+            <div class="glass-card" data-tilt>
+                <div class="card-icon">💝</div>
+                <h3 class="card-title">Eternal Promise</h3>
+                <p class="card-message">I promise to love you beyond the stars, beyond time itself. You're my today, tomorrow, and forever.</p>
+            </div>
+        </div>
+
+        <!-- LOVE METER -->
+        <div class="love-meter">
+            <h2 class="meter-title">My Love For You 💕</h2>
+            <div class="meter-bar">
+                <div class="meter-fill"></div>
+            </div>
+        </div>
+
+        <!-- PHOTO FRAME -->
+        <div class="photo-frame">
+            <div class="frame-inner">
+                <div class="frame-image"><img src="IMG-20230728-WA0063.jpg" alt="img" width="280px" height="280px"></div>
+            </div>
+        </div>
+
+        <!-- FINAL MESSAGE -->
+        <div class="final-message">
+            You're My Forever Rose
+            <div class="eternal-rose">🌹</div>
+        </div>
+    </div>
+
+    <!-- AUDIO TOGGLE -->
+    <div class="audio-toggle" id="audioToggle" title="Toggle Sound">🔊</div>
+
+    <script>
+        // PARTICLE SYSTEM
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 50;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.color = `hsla(${Math.random() * 60 + 330}, 100%, ${Math.random() * 30 + 60}%, ${Math.random() * 0.5 + 0.3})`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // FALLING PETALS
+        for (let i = 0; i < 100; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.textContent = '🌹';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            petal.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+            document.body.appendChild(petal);
+        }
+
+        // FLOATING ROSES
+        for (let i = 0; i < 15; i++) {
+            const rose = document.createElement('div');
+            rose.className = 'floating-rose';
+            rose.textContent = '🌹';
+            rose.style.top = Math.random() * 100 + 'vh';
+            rose.style.left = Math.random() * 100 + 'vw';
+            rose.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            rose.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(rose);
+        }
+
+        // CARD TILT EFFECT
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+
+            // CLICK EFFECT
+            card.addEventListener('click', (e) => {
+                createHeartExplosion(e.clientX, e.clientY);
+                card.style.animation = 'none';
+                setTimeout(() => card.style.animation = '', 10);
+            });
+        });
+
+        // HEART EXPLOSION
+        function createHeartExplosion(x, y) {
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = '💖';
+                heart.style.position = 'fixed';
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.fontSize = '2rem';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '1000';
+                document.body.appendChild(heart);
+
+                const angle = (Math.PI * 2 * i) / 20;
+                const velocity = 5;
+                let posX = 0, posY = 0;
+                const animation = setInterval(() => {
+                    posX += Math.cos(angle) * velocity;
+                    posY += Math.sin(angle) * velocity;
+                    heart.style.transform = `translate(${posX}px, ${posY}px) scale(${1 - posY/100})`;
+                    heart.style.opacity = 1 - Math.abs(posY) / 100;
+                    if (Math.abs(posY) > 100) {
+                        clearInterval(animation);
+                        heart.remove();
+                    }
+                }, 16);
+            }
+            playSound('pop');
+        }
+
+        // AUDIO SYSTEM
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let audioEnabled = false;
+
+        function playSound(type) {
+            if (!audioEnabled) return;
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            if (type === 'pop') {
+                oscillator.frequency.value = 800;
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            }
+        }
+
+        document.getElementById('audioToggle').addEventListener('click', function() {
+            audioEnabled = !audioEnabled;
+            this.textContent = audioEnabled ? '🔊' : '🔇';
+            if (audioEnabled) playSound('pop');
+        });
+
+        // SCROLL ANIMATIONS
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            observer.observe(card);
+        });
+
+        // PERFORMANCE OPTIMIZATION
+        document.querySelectorAll('.glass-card, .hero-title, .meter-fill').forEach(el => {
+            el.style.willChange = 'transform, opacity';
+        });
+    </script>
+</body>
+</html>
